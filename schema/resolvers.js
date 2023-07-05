@@ -29,6 +29,30 @@ const resolvers = {
             );
         },
     },
+    Mutation: {
+        createUser: (parent, args) => {
+            const user = args.input
+            const lastUserId = UserList[UserList.length - 1].id
+            user.id = lastUserId + 1
+            UserList.push(user)
+            return user
+        },
+
+        updateUsername: (parent, args) => {
+            const {id, newUserName} = args.input
+            let userUpdated;
+            const user = _.find(UserList, {id: Number(id)});
+            user.userName = newUserName
+            userUpdated = user
+            return userUpdated
+        },
+
+        deleteUser: (parent, args) => {
+            const id = args.id
+            _.remove(UserList, (user) => user.id == Number(id))
+            return null
+        }
+    }
 };
 
 module.exports = {resolvers};

@@ -40,6 +40,53 @@
     }
   }
 
+  #create user
+  mutation CreateUser($input: CreateUserInput!){
+    createUser(input: $input) {
+      id
+      name
+      age
+    }
+  }
+
+  #Variables
+  {
+    "input": {
+      "name": "Jonny",
+      "userName": "jonny",
+      "age": 25,
+    }
+  }
+
+  #update username
+  mutation UpdateUsername($input: UpdateUsernameInput!) {
+    updateUsername(input: $input) {
+      name
+      userName
+    }
+  }
+  #Variables
+  {
+    "input": {
+      "id": "1",
+      "newUserName": "xiong"
+    }
+  }
+
+  # remove user
+  mutation removeUser($deleteUserId: ID!){
+    deleteUser(id: $deleteUserId) {
+      name
+    }
+  }
+
+  #Variables
+  {
+    "deleteUserId": "1"
+  }
+
+
+
 
 
 
