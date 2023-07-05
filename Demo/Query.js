@@ -16,13 +16,17 @@
   
   query ExampleQuery($userId: ID!) {
     user(id: $userId) {
-      id
+      ...GetUserData
+    }
+  }
+  
+  fragment GetUserData on User {
+    id
+    name
+    age
+    nationality
+    favoriteMovies {
       name
-      age
-      nationality
-      favoriteMovies {
-        name
-      }
     }
   }
 
@@ -85,6 +89,24 @@
     "deleteUserId": "1"
   }
 
+
+  # Union
+  query GetAllUsers {
+    users {
+      ...on UsersSuccessfulResult {
+        users {
+          id
+          name
+          age
+        }
+      }
+  
+      ...on UsersErrorResult {
+        message
+      }
+    }
+  }
+  
 
 
 
